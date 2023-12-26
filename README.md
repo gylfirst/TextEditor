@@ -17,6 +17,11 @@ Le code sera peut être mis à jour dans le futur.
 
 ## Installation
 
+### Release :
+
+Aller dans l'onglet [Releases](https://github.com/gylfirst/TextEditor/releases) à droite, et télécharger une version.
+
+### Pour avoir le code et le compiler soi-même :
 ```bash
 git clone https://github.com/gylfirst/TextEditor.git
 cd TextEditor
