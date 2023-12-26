@@ -1,19 +1,14 @@
+# Imports
+
 from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
 import clipboard as cb
 
 
-root = Tk()
-root.title('Text Editor')
+# COMMANDS
 
-root.grid_columnconfigure(0, weight=1)
-root.grid_rowconfigure(0, weight=1)
-
-text = Text(root, undo=True)
-text.grid(row=0, column=0)
-
-# File Menu
+## File Menu
 
 global fileLocation
 
@@ -50,17 +45,13 @@ def saveFileAs():
     file1.close()
 
 
-def donothing():
-    return 0
-
-
 def exitWindow():
     answer = messagebox.askquestion(
         title='Exit', message='Do you want to quit?')
     if answer == 'yes':
         root.destroy()
 
-# Edit Menu
+## Edit Menu
 
 
 def cutSelected():
@@ -88,7 +79,7 @@ def selectAll():
     text.mark_set(INSERT, '1.0')
     text.see(INSERT)
 
-# Help Menu
+## Help Menu
 
 
 def helpIndex():
@@ -98,10 +89,23 @@ def helpIndex():
 
 def displayAbout():
     messagebox.showinfo(
-        title='About...', message='Text Editor\n\nDevelopped by Matthieu TOURRETTE\nVersion: 0.0.1')
+        title='About...', message='Text Editor\n\nDevelopped by Matthieu TOURRETTE\nVersion: 0.0.2')
 
 
 # Tkinter interface
+
+root = Tk()
+root.title('Text Editor')
+
+text = Text(root, undo=True)
+text.pack(side=LEFT, expand=True, fill=BOTH)
+
+scrollbar = Scrollbar(root, orient='vertical')
+scrollbar.pack(side=RIGHT, fill=Y)
+scrollbar.config(command=text.yview)
+
+text.focus()
+text.config(yscrollcommand=scrollbar.set)
 
 menubar = Menu(root)
 
@@ -135,10 +139,6 @@ helpmenu.add_command(label='About...', command=displayAbout)
 menubar.add_cascade(label='Help', menu=helpmenu)
 
 root.config(menu=menubar)
-
-scrollbar = Scrollbar(root, orient='vertical', command=text.yview)
-scrollbar.grid(row=0, column=1, sticky=NS)
-text['yscrollcommand'] = scrollbar.set
 
 # DO NOT TOUCH
 root.mainloop()
